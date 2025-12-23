@@ -11,8 +11,12 @@ import {
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import dotenv from "dotenv";
+import { setGlobalDispatcher, EnvHttpProxyAgent } from "undici";
 
 dotenv.config();
+
+const envHttpProxyAgent = new EnvHttpProxyAgent();
+setGlobalDispatcher(envHttpProxyAgent);
 
 const toolSchema = z.object({
   code: z.string(),
